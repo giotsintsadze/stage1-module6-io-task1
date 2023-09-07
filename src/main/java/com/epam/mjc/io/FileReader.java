@@ -3,9 +3,13 @@ package com.epam.mjc.io;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class FileReader {
+    private static final Logger logger = Logger.getLogger(FileReader.class.getName());
+
     public Profile getDataFromFile(File file) {
         Map<String, String> keyToValueMap = new HashMap<>();
         try (FileInputStream inputStream = new FileInputStream(file.getAbsolutePath())) {
@@ -20,7 +24,7 @@ public class FileReader {
                 }
             }
         } catch (java.io.IOException e) {
-            System.out.println("File not found: " + e);
+            logger.log(Level.SEVERE, "File not found: ", e);
         }
 
         return new Profile(
